@@ -8,7 +8,8 @@ import {
   Image,
   RefreshControl
 } from "react-native";
-import { LinearGradient, Constants } from "expo";
+import Constants from "expo-constants";
+import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
 
 import StatusBar from "../StatusBar/StatusBar";
@@ -19,6 +20,7 @@ import AppConstants from "../../constants/AppConstants";
 import Header from "../Header/Header";
 import PriceTag from "../shared/PriceTag";
 import BrandTag from "../shared/BrandTag";
+import GadgetsUnderTemplate from "../shared/GadgetsUnderTemplate";
 
 const { width, height } = Dimensions.get("window");
 
@@ -101,165 +103,7 @@ const DealsOfTheDayData = [
 ];
 
 export default class GadgetsUnder100 extends Component {
-  _shareComponent = new ShareComponent();
-
-  state = {
-    refreshing: false
-  };
-
-  onShare = link => {
-    this._shareComponent.shareFuntion(link);
-  };
-
-  _onRefresh = () => {
-    this.setState({ refreshing: true });
-    setTimeout(() => {
-      this.setState({ refreshing: false });
-    }, 5000);
-  };
-
-  renderProducts = () => {
-    let productTemplate = [];
-    DealsOfTheDayData.map((data, i) => {
-      productTemplate.push(
-        <TouchableOpacity
-          activeOpacity={1}
-          //   onPress={() => this.props.navigation.push("ProductDetails")}
-          style={{
-            width: PRODUCT_CARD_WIDTH,
-            height: PRODUCT_CARD_HEIGHT,
-            backgroundColor: Colors.white,
-            marginVertical: 10,
-            borderRadius: 5,
-            overflow: "hidden"
-          }}
-          key={i}
-        >
-          <View
-            style={{
-              width: "100%",
-              // height: "95%",
-              position: "relative",
-              padding: 5
-            }}
-          >
-            <View
-              style={{
-                justifyContent: "space-between",
-                flexDirection: "row",
-                alignItems: "flex-start"
-              }}
-            >
-              <BrandTag brand="Amazon" />
-              <TouchableOpacity onPress={() => this.onShare(data.link)}>
-                <Feather
-                  style={{
-                    color: Colors.primaryDarkThemeColor,
-                    fontSize: 20
-                  }}
-                  name="share-2"
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={{ alignItems: "center" }}>
-              <View
-                style={{
-                  width: 100,
-                  height: 100
-                }}
-              >
-                <Image
-                  source={{ uri: data.image }}
-                  style={{ flex: 1, width: null, height: null }}
-                  resizeMode="cover"
-                />
-              </View>
-            </View>
-            <View>
-              <Text
-                style={{ color: Colors.grey, fontSize: 10 }}
-                numberOfLines={2}
-              >
-                {data.name}
-              </Text>
-              <PriceTag price={data.price} />
-            </View>
-          </View>
-          <TouchableOpacity
-            style={{
-              flex: 1,
-              // borderTopWidth: 1,
-              backgroundColor: Colors.like,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Feather
-              color={Colors.white}
-              name="heart"
-              style={{ fontSize: 13 }}
-            />
-            <Text style={{ textAlign: "center", color: Colors.white, fontSize:13, paddingLeft:5 }}>
-              Add to wishlist
-            </Text>
-          </TouchableOpacity>
-        </TouchableOpacity>
-      );
-    });
-
-    return productTemplate;
-  };
-
   render() {
-    return (
-      <View
-        style={{
-          flex: 1
-        }}
-      >
-        <StatusBar />
-        <Header {...this.props} screen={AppConstants.GADGETS_UNDER_100} />
-        <View
-          style={{ padding: 10, paddingBottom: Constants.statusBarHeight * 4 }}
-        >
-          <LinearGradient
-            start={{ x: 0, y: 0.75 }}
-            end={{ x: 1, y: 0.25 }}
-            colors={["#f74e7f", "#f74e7f", "#f74e7f", "#f87b48", "#f87b48"]}
-            style={{
-              borderRadius: 10,
-              elevation: 10,
-              paddingHorizontal: 10,
-              paddingVertical: 5
-            }}
-          >
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{
-                paddingVertical: 10,
-                paddingHorizontal: 5,
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-between"
-              }}
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this._onRefresh}
-                  colors={[
-                    Colors.primaryDarkThemeColor,
-                    Colors.secondaryColor,
-                    Colors.like
-                  ]}
-                />
-              }
-            >
-              {this.renderProducts()}
-            </ScrollView>
-          </LinearGradient>
-        </View>
-      </View>
-    );
+    return <GadgetsUnderTemplate {...this.props} />;
   }
 }

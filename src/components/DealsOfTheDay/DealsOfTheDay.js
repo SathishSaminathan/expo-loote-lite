@@ -140,7 +140,8 @@ class DealsOfTheDay extends Component {
         >
           <CustomText
             style={{
-              fontSize: 20
+              fontSize: 20,
+              textDecorationLine: "underline"
             }}
           >
             Deals of the Day

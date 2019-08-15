@@ -12,14 +12,13 @@ import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
 
-import StatusBar from "../StatusBar/StatusBar";
-import Colors from "../../constants/ThemeConstants";
-
-import ShareComponent from "../ShareComponent";
-import AppConstants from "../../constants/AppConstants";
-import Header from "../Header/Header";
-import PriceTag from "../shared/PriceTag";
-import BrandTag from "../shared/BrandTag";
+import StatusBar from "../../../../components/shared/StatusBar";
+import BrandTag from "../BrandTag";
+import ShareComponent from "../../ShareComponent";
+import Header from "../../Header/Header";
+import AppConstants from "../../../constants/AppConstants";
+import PriceTag from "../PriceTag";
+import Colors from "../../../constants/ThemeConstants";
 
 const { width, height } = Dimensions.get("window");
 
@@ -101,7 +100,7 @@ const DealsOfTheDayData = [
   }
 ];
 
-export default class GadgetsUnder500 extends Component {
+export default class GadgetsUnderTemplate extends Component {
   _shareComponent = new ShareComponent();
 
   state = {
@@ -190,7 +189,7 @@ export default class GadgetsUnder500 extends Component {
             style={{
               flex: 1,
               // borderTopWidth: 1,
-              backgroundColor: Colors.primaryDarkThemeColor,
+              backgroundColor: Colors.like,
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "center"
@@ -201,7 +200,14 @@ export default class GadgetsUnder500 extends Component {
               name="heart"
               style={{ fontSize: 13 }}
             />
-            <Text style={{ textAlign: "center", color: Colors.white, fontSize:13, paddingLeft:5 }}>
+            <Text
+              style={{
+                textAlign: "center",
+                color: Colors.white,
+                fontSize: 13,
+                paddingLeft: 5
+              }}
+            >
               Add to wishlist
             </Text>
           </TouchableOpacity>
@@ -220,20 +226,14 @@ export default class GadgetsUnder500 extends Component {
         }}
       >
         <StatusBar />
-        <Header {...this.props} screen={AppConstants.GADGETS_UNDER_500} />
+        <Header {...this.props} screen={AppConstants.GADGETS_UNDER_100} />
         <View
           style={{ padding: 10, paddingBottom: Constants.statusBarHeight * 4 }}
         >
           <LinearGradient
             start={{ x: 0, y: 0.75 }}
             end={{ x: 1, y: 0.25 }}
-            colors={[
-              Colors.primaryThemeColor,
-              Colors.primaryThemeColor,
-              Colors.primaryThemeColor,
-              Colors.secondaryColor,
-              Colors.secondaryColor
-            ]}
+            colors={["#f74e7f", "#f74e7f", "#f74e7f", "#f87b48", "#f87b48"]}
             style={{
               borderRadius: 10,
               elevation: 10,
