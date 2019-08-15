@@ -16,10 +16,10 @@ import * as Animatable from "react-native-animatable";
 import StatusBar from "../../../../components/shared/StatusBar";
 import BrandTag from "../BrandTag";
 import Header from "../../Header/Header";
-import AppConstants from "../../../constants/AppConstants";
 import PriceTag from "../PriceTag";
 import Colors from "../../../constants/ThemeConstants";
 import ShareComponent from "../../ShareComponent";
+import PullToRefresh from "../PullToRefresh";
 
 const { width, height } = Dimensions.get("window");
 
@@ -147,7 +147,6 @@ export default class GadgetsUnderTemplate extends Component {
       refreshing,
       headerTitle
     } = this.props;
-    console.log("headerTitle", this.props.headerTitle);
     return (
       <View
         style={{
@@ -156,6 +155,7 @@ export default class GadgetsUnderTemplate extends Component {
       >
         <StatusBar />
         <Header {...this.props} screen={headerTitle} />
+        <PullToRefresh />
         <View
           style={{ padding: 10, paddingBottom: Constants.statusBarHeight * 4 }}
         >

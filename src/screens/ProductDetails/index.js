@@ -10,7 +10,7 @@ import {
   WebView,
   Linking
 } from "react-native";
-import { WebBrowser } from "expo";
+import * as WebBrowser from 'expo-web-browser';
 import Constants from "expo-constants";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 

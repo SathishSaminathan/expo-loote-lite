@@ -11,7 +11,7 @@ const PickedForYouData = [
     name:
       "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
     link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
+    price: "249.00"
   },
   {
     image:
@@ -19,7 +19,7 @@ const PickedForYouData = [
     name:
       "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
     link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
+    price: "249.00"
   },
   {
     image:
@@ -27,7 +27,7 @@ const PickedForYouData = [
     name:
       "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
     link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
+    price: "249.00"
   },
   {
     image:
@@ -35,7 +35,7 @@ const PickedForYouData = [
     name:
       "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
     link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
+    price: "249.00"
   }
 ];
 

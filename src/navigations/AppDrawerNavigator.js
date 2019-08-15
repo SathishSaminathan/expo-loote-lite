@@ -170,7 +170,7 @@ const AppDrawerNavigations = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Gadgets Under 100",
     contentComponent: CustomDrawerItems,
     // unmountInactiveRoutes: true,
     contentOptions: {

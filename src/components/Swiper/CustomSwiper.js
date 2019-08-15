@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Image, TouchableWithoutFeedback } from "react-native";
 import Swiper from "react-native-swiper";
-import { WebBrowser } from "expo";
+import * as WebBrowser from 'expo-web-browser';
 
 import Images from "../../assets/images/images";
 import Colors from "../../constants/ThemeConstants";
