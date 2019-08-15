@@ -3,12 +3,13 @@ import Colors from "../../constants/ThemeConstants";
 import GadgetsUnderTemplate from "../shared/GadgetsUnderTemplate";
 import { ProductServices } from "../../services/ProductServices";
 import APIConstants from "../../constants/APIConstants";
+import AppConstants from "../../constants/AppConstants";
 
 export default class GadgetsUnder500 extends Component {
   _productServices = new ProductServices();
   state = {
     productsData: [],
-    refreshing: false
+    refreshing: true
   };
 
   componentDidMount() {
@@ -54,6 +55,7 @@ export default class GadgetsUnder500 extends Component {
         addToWishlistButtonColor={Colors.primaryDarkThemeColor}
         refreshing={refreshing}
         refreshFunc={this.fetchData}
+        headerTitle={AppConstants.GADGETS_UNDER_500}
       />
     );
   }

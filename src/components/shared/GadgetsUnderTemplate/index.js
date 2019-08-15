@@ -42,7 +42,8 @@ export default class GadgetsUnderTemplate extends Component {
         <Animatable.View
           key={i}
           animation={i % 2 === 0 ? "fadeInLeft" : "fadeInRight"}
-          delay={800}
+          delay={500}
+          duration={200}
         >
           <TouchableOpacity
             activeOpacity={1}
@@ -143,7 +144,8 @@ export default class GadgetsUnderTemplate extends Component {
       linearGradientColors,
       productsData,
       addToWishlistButtonColor,
-      refreshing
+      refreshing,
+      headerTitle
     } = this.props;
     // console.log("refreshing", this.props)
     return (
@@ -153,11 +155,11 @@ export default class GadgetsUnderTemplate extends Component {
         }}
       >
         <StatusBar />
-        <Header {...this.props} screen={AppConstants.GADGETS_UNDER_100} />
+        <Header {...this.props} screen={headerTitle} />
         <View
           style={{ padding: 10, paddingBottom: Constants.statusBarHeight * 4 }}
         >
-          <Animatable.View animation="slideInUp" duration={1000}>
+          <Animatable.View animation="slideInUp" duration={500}>
             <LinearGradient
               start={{ x: 0, y: 0.75 }}
               end={{ x: 1, y: 0.25 }}
