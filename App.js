@@ -15,15 +15,14 @@ import store from "./src/store";
 import Dummy from "./src/screens/DummyScreen";
 
 class App extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       isUserLoggedIn: null,
       isFontLoaded: false,
       user: null
     };
   }
-  
 
   componentWillMount() {
     this.loadFonts();
@@ -49,7 +48,7 @@ class App extends Component {
 
   render() {
     const { isFontLoaded } = this.state;
-    console.log("isFontLoaded", isFontLoaded)
+    console.log("isFontLoaded", isFontLoaded);
 
     if (!isFontLoaded) {
       return (

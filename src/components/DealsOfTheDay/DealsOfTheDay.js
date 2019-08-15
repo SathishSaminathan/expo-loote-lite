@@ -14,6 +14,7 @@ import Colors from "../../constants/ThemeConstants";
 import ShareComponent from "../ShareComponent";
 import PriceTag from "../shared/PriceTag";
 import BrandTag from "../shared/BrandTag";
+import { MonoText, CustomText } from "../../../components/StyledText";
 
 const { width, height } = Dimensions.get("window");
 const PRODUCT_CARD_WIDTH = width / 2 - 18;
@@ -137,17 +138,13 @@ class DealsOfTheDay extends Component {
             alignItems: "center"
           }}
         >
-          {fontLoaded && (
-            <Text
-              style={{
-                fontSize: 20,
-                fontFamily: "Lato-BoldItalic",
-                textDecorationLine: "underline"
-              }}
-            >
-              Deals of the Day
-            </Text>
-          )}
+          <CustomText
+            style={{
+              fontSize: 20
+            }}
+          >
+            Deals of the Day
+          </CustomText>
         </View>
         <View
           style={{
