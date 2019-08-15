@@ -13,6 +13,7 @@ import { Feather } from "@expo/vector-icons";
 import Colors from "../../constants/ThemeConstants";
 import PriceTag from "../shared/PriceTag";
 import BrandTag from "../shared/BrandTag";
+import ShareComponent from "../ShareComponent";
 
 const { width, height } = Dimensions.get("window");
 const PRODUCT_CARD_WIDTH = width / 2 - 18;
@@ -59,26 +60,6 @@ class PickedForYou extends Component {
     this.state = {};
   }
 
-  onShare = async link => {
-    try {
-      const result = await Share.share({
-        message: link
-      });
-
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-
   pickedForYouProduct = () => {
     let productTemplate = [];
 
@@ -112,15 +93,7 @@ class PickedForYou extends Component {
               }}
             >
               <BrandTag brand="Amazon" />
-              <TouchableOpacity onPress={() => this.onShare(data.link)}>
-                <Feather
-                  style={{
-                    color: Colors.primaryDarkThemeColor,
-                    fontSize: 20
-                  }}
-                  name="share-2"
-                />
-              </TouchableOpacity>
+              <ShareComponent link={data.link} />
             </View>
             <Image
               source={{ uri: data.image }}

@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  WebView, Linking
+  WebView,
+  Linking
 } from "react-native";
-import { Constants, WebBrowser } from "expo";
+import { WebBrowser } from "expo";
+import Constants from "expo-constants";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 
 import Colors from "../../constants/ThemeConstants";
@@ -20,7 +22,6 @@ const { width, height } = Dimensions.get("window");
 const HEADER_HEIGHT = 60;
 
 class ProductDetails extends Component {
-  _shareComponent = new ShareComponent();
   constructor(props) {
     super(props);
     this.animatedValue = new Animated.Value(0);
@@ -29,10 +30,6 @@ class ProductDetails extends Component {
       isLiked: true
     };
   }
-
-  onShare = link => {
-    this._shareComponent.shareFuntion(link);
-  };
 
   handleLike = () => {
     this.setState(prevState => ({ isLiked: !prevState.isLiked }));
@@ -45,7 +42,6 @@ class ProductDetails extends Component {
 
   toggleMenu = () => {
     const { menuOpened } = this.state;
-    console.log("menuOpened", menuOpened);
     if (menuOpened) {
       Animated.timing(this.animatedValue, {
         toValue: 1,
@@ -144,18 +140,16 @@ class ProductDetails extends Component {
             }
           ]}
         >
-          <TouchableOpacity
-            activeOpacity={1}
-            style={styles.menuButtons}
-            onPress={() => this.onShare("https://amzn.to/2INiHU2")}
+          <View
+            style={{
+              backgroundColor: Colors.white,
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
           >
-            <View style={styles.itemStyles}>
-              <Feather
-                name="share-2"
-                style={{ fontSize: 25, color: Colors.primaryThemeColor }}
-              />
-            </View>
-          </TouchableOpacity>
+            <ShareComponent link={"https://amzn.to/2INiHU2"} />
+          </View>
           <TouchableOpacity activeOpacity={1} style={styles.menuButtons}>
             <TouchableOpacity
               style={styles.itemStyles}
@@ -238,7 +232,9 @@ class ProductDetails extends Component {
               marginHorizontal: 10
             }}
             // onPress={() => this.props.navigation.push("WebViewPage")}
-            onPress={()=> WebBrowser.openBrowserAsync('https://amzn.to/2INiHU2')}
+            onPress={() =>
+              WebBrowser.openBrowserAsync("https://amzn.to/2INiHU2")
+            }
           >
             <Text
               style={{ color: Colors.white, fontSize: 20, textAlign: "center" }}
@@ -250,7 +246,7 @@ class ProductDetails extends Component {
       </View>
     );
   }
-} 
+}
 
 export default ProductDetails;
 

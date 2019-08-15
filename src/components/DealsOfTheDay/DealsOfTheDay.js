@@ -56,11 +56,6 @@ const DealsOfTheDayData = [
 ];
 
 class DealsOfTheDay extends Component {
-  _shareComponent = new ShareComponent();
-
-  onShare = link => {
-    this._shareComponent.shareFuntion(link);
-  };
 
   dealsOfTheDayProduct = () => {
     let productTemplate = [];
@@ -95,15 +90,7 @@ class DealsOfTheDay extends Component {
               }}
             >
               <BrandTag brand="Amazon" />
-              <TouchableOpacity onPress={() => this.onShare(data.link)}>
-                <Feather
-                  style={{
-                    color: Colors.primaryDarkThemeColor,
-                    fontSize: 20
-                  }}
-                  name="share-2"
-                />
-              </TouchableOpacity>
+              <ShareComponent link={data.link} />
             </View>
             <Image
               source={{ uri: data.image }}

@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import Colors from "../../../constants/ThemeConstants";
 
-const BrandTag = ({ brand }) => {
+const BrandTag = ({ brand, backgroundColor }) => {
   return (
     <Text
       style={{
@@ -11,7 +11,7 @@ const BrandTag = ({ brand }) => {
         paddingHorizontal: 5,
         borderRadius: 10,
         fontSize: 7,
-        backgroundColor: Colors.primaryDarkThemeColor
+        backgroundColor: backgroundColor
       }}
     >
       {brand}
