@@ -38,23 +38,16 @@ class App extends Component {
       "Lato-Italic": require("./src/assets/fonts/Lato/Lato-Italic.ttf"),
       "Lato-BoldItalic": require("./src/assets/fonts/Lato/Lato-BoldItalic.ttf")
     });
-    this.setState(
-      {
-        isFontLoaded: true
-      },
-      () => console.log(this.state.isFontLoaded, "this")
-    );
+    this.setState({
+      isFontLoaded: true
+    });
   };
 
   render() {
     const { isFontLoaded } = this.state;
 
     if (!isFontLoaded) {
-      return (
-        <Provider store={store}>
-          <LoadingScreen userLoaded={this.checkIfUserLogggedIn} />
-        </Provider>
-      );
+      return <LoadingScreen/>;
     }
 
     return (
