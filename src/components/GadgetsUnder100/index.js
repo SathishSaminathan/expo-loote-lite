@@ -74,7 +74,7 @@ export default class GadgetsUnder100 extends Component {
           style={{ backgroundColor: Colors.like }}
           visible={dataLoaded}
           onDismiss={() => this.setState({ dataLoaded: false })}
-          duration={2000}
+          duration={1000}
           // action={{
           //   label: "Undo",
           //   onPress: () => {

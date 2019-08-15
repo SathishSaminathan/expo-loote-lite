@@ -244,7 +244,7 @@ class Wishlist extends Component {
         <Snackbar
           visible={visible}
           onDismiss={() => this.setState({ visible: false })}
-          duration={2000}
+          duration={1000}
           // action={{
           //   label: "Undo",
           //   onPress: () => {
