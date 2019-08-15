@@ -94,7 +94,8 @@ const productStackNavigations = createStackNavigator(
     Home: Home,
     ProductDetails: ProductDetails,
     WebViewPage: WebViewPage,
-    CameraScreen: CameraScreen
+    CameraScreen: CameraScreen,
+    Notification: Notification
   },
   {
     initialRouteName: "Home",
@@ -123,15 +124,15 @@ const AppDrawerNavigations = createDrawerNavigator(
         )
       }
     },
-    Notification: {
-      screen: Notification,
-      navigationOptions: {
-        // title: "Search Videos",
-        drawerIcon: ({ tintColor }) => (
-          <Feather color={tintColor} name="bell" style={{ fontSize: 20 }} />
-        )
-      }
-    },
+    // Notification: {
+    //   screen: Notification,
+    //   navigationOptions: {
+    //     // title: "Search Videos",
+    //     drawerIcon: ({ tintColor }) => (
+    //       <Feather color={tintColor} name="bell" style={{ fontSize: 20 }} />
+    //     )
+    //   }
+    // },
     ProductDetails: {
       screen: ProductDetails
     },
@@ -169,7 +170,7 @@ const AppDrawerNavigations = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: "Gadgets Under 100",
+    initialRouteName: "Home",
     contentComponent: CustomDrawerItems,
     // unmountInactiveRoutes: true,
     contentOptions: {

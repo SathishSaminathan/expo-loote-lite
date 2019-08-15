@@ -238,7 +238,6 @@ class Wishlist extends Component {
         <Header
           {...this.props}
           screen={AppConstants.WISHLIST}
-          title={AppConstants.WISHLIST}
         />
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           {this.renderList()}

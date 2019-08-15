@@ -51,7 +51,6 @@ class Notification extends Component {
         <Header
           {...this.props}
           screen={AppConstants.NOTIFICATION}
-          title={"Notification"}
         />
         <View style={styles.container}>
           <View style={styles.animationContainer}>

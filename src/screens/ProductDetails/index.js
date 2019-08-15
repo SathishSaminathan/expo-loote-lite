@@ -16,6 +16,8 @@ import { Feather, FontAwesome } from "@expo/vector-icons";
 
 import Colors from "../../constants/ThemeConstants";
 import ShareComponent from "../../components/ShareComponent";
+import AppConstants from "../../constants/AppConstants";
+import { CustomText } from "../../../components/StyledText";
 
 const { width, height } = Dimensions.get("window");
 
@@ -104,15 +106,14 @@ class ProductDetails extends Component {
           <TouchableOpacity onPress={() => this.props.navigation.pop()}>
             <Feather style={styles.iconStyle} name="arrow-left" />
           </TouchableOpacity>
-          <Text
+          <CustomText
             style={{
               color: Colors.secondaryColor,
-              fontFamily: "Lato-Regular",
               fontSize: 20
             }}
           >
-            Product Details
-          </Text>
+            {AppConstants.PRODUCT_DETAILS}
+          </CustomText>
           <TouchableOpacity
             onPress={() =>
               this.setState({ menuOpened: !this.state.menuOpened }, () =>

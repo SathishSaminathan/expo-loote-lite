@@ -47,7 +47,7 @@ export default class GadgetsUnderTemplate extends Component {
         >
           <TouchableOpacity
             activeOpacity={1}
-            //   onPress={() => this.props.navigation.push("ProductDetails")}
+            //   onPress={() => this.props.navigation.push("PRODUCT_DETAILS")}
             style={{
               width: PRODUCT_CARD_WIDTH,
               height: PRODUCT_CARD_HEIGHT,
@@ -147,7 +147,7 @@ export default class GadgetsUnderTemplate extends Component {
       refreshing,
       headerTitle
     } = this.props;
-    // console.log("refreshing", this.props)
+    console.log("headerTitle", this.props.headerTitle);
     return (
       <View
         style={{
@@ -178,7 +178,8 @@ export default class GadgetsUnderTemplate extends Component {
                   paddingHorizontal: 5,
                   flexDirection: "row",
                   flexWrap: "wrap",
-                  justifyContent: "space-between"
+                  justifyContent: "space-between",
+                  minHeight: 200
                 }}
                 refreshControl={
                   <RefreshControl
