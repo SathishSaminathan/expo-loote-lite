@@ -7,7 +7,8 @@ import APIConstants from "../../constants/APIConstants";
 export default class GadgetsUnder500 extends Component {
   _productServices = new ProductServices();
   state = {
-    productsData: []
+    productsData: [],
+    refreshing: false
   };
 
   componentDidMount() {
@@ -15,6 +16,9 @@ export default class GadgetsUnder500 extends Component {
   }
 
   fetchData = () => {
+    this.setState({
+      refreshing: true
+    });
     const data = {
       p: 500
     };
@@ -22,16 +26,20 @@ export default class GadgetsUnder500 extends Component {
       .services(APIConstants.GET_PRODUCTS_UNDER_500, data)
       .then(res => {
         this.setState({
-          productsData: res.data.sm
+          productsData: res.data.sm,
+          refreshing: false
         });
       })
       .catch(err => {
         console.log(err);
+        this.setState({
+          refreshing: false
+        });
       });
   };
-  
+
   render() {
-    const { productsData } = this.state;
+    const { productsData, refreshing } = this.state;
     return (
       <GadgetsUnderTemplate
         {...this.props}
@@ -44,6 +52,8 @@ export default class GadgetsUnder500 extends Component {
         ]}
         productsData={productsData}
         addToWishlistButtonColor={Colors.primaryDarkThemeColor}
+        refreshing={refreshing}
+        refreshFunc={this.fetchData}
       />
     );
   }

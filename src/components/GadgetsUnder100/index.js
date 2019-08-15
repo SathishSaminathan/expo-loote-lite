@@ -40,7 +40,6 @@ export default class GadgetsUnder100 extends Component {
 
   render() {
     const { productsData, refreshing } = this.state;
-    console.log("refreshing", refreshing)
     return (
       <GadgetsUnderTemplate
         {...this.props}
@@ -54,6 +53,7 @@ export default class GadgetsUnder100 extends Component {
         productsData={productsData}
         addToWishlistButtonColor={Colors.like}
         refreshing={refreshing}
+        refreshFunc={this.fetchData}
       />
     );
   }

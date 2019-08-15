@@ -32,10 +32,7 @@ export default class GadgetsUnderTemplate extends Component {
   };
 
   _onRefresh = () => {
-    this.setState({ refreshing: true });
-    setTimeout(() => {
-      this.setState({ refreshing: false });
-    }, 5000);
+    this.props.refreshFunc();
   };
 
   renderProducts = (productsData, addToWishlistButtonColor) => {
