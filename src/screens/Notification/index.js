@@ -7,6 +7,7 @@ import StatusBar from "../../components/StatusBar/StatusBar";
 import Header from "../../components/Header/Header";
 import AppConstants from "../../constants/AppConstants";
 import FloatingButton from "../../components/FLB/FloatingButton";
+import { CustomText } from "../../../components/StyledText.js";
 
 class Notification extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Notification extends Component {
   };
 
   componentWillMount() {
-    this._playAnimation();
+    // this._playAnimation();
   }
 
   _changeSpeed = speed => {
@@ -45,65 +46,68 @@ class Notification extends Component {
   };
 
   render() {
+    // const lottieAnimation = (
+    //   <View style={styles.container}>
+    //     <View style={styles.animationContainer}>
+    //       {this.state.animation && (
+    //         <LottieView
+    //           ref={animation => {
+    //             this.animation = animation;
+    //           }}
+    //           style={{
+    //             width: 400,
+    //             height: 400,
+    //             backgroundColor: "#fff"
+    //           }}
+    //           source={this.state.animation}
+    //           speed={this.state.speed}
+    //           loop={true}
+    //         />
+    //       )}
+    //       <View>
+    //         <Button
+    //           title="Wash the veggies"
+    //           color="#4caf50"
+    //           onPress={this._playAnimation}
+    //         />
+    //         <View style={styles.margin} />
+    //         <Button
+    //           title="Stop washing"
+    //           color="#4caf50"
+    //           onPress={this._stopAnimation}
+    //         />
+    //         <View style={styles.margin} />
+    //         <View style={styles.speedBtnContainer}>
+    //           <Button
+    //             title="Slow"
+    //             color="#4caf50"
+    //             onPress={() => this._changeSpeed(0.5)}
+    //           />
+    //           <View style={styles.marginRight} />
+    //           <Button
+    //             title="Normal"
+    //             color="#4caf50"
+    //             onPress={() => this._changeSpeed(1)}
+    //           />
+    //           <View style={styles.marginRight} />
+    //           <Button
+    //             title="Fast"
+    //             color="#4caf50"
+    //             onPress={() => this._changeSpeed(1.5)}
+    //           />
+    //         </View>
+    //       </View>
+    //     </View>
+    //   </View>
+    // );
     return (
       <View style={{ flex: 1 }}>
         <StatusBar />
-        <Header
-          {...this.props}
-          screen={AppConstants.NOTIFICATION}
-          title={"Notification"}
-        />
-        <View style={styles.container}>
-          <View style={styles.animationContainer}>
-            {this.state.animation && (
-              <LottieView
-                ref={animation => {
-                  this.animation = animation;
-                }}
-                style={{
-                  width: 400,
-                  height: 400,
-                  backgroundColor: "#fff"
-                }}
-                source={this.state.animation}
-                speed={this.state.speed}
-                loop={true}
-              />
-            )}
-            <View>
-              <Button
-                title="Wash the veggies"
-                color="#4caf50"
-                onPress={this._playAnimation}
-              />
-              <View style={styles.margin} />
-              <Button
-                title="Stop washing"
-                color="#4caf50"
-                onPress={this._stopAnimation}
-              />
-              <View style={styles.margin} />
-              <View style={styles.speedBtnContainer}>
-                <Button
-                  title="Slow"
-                  color="#4caf50"
-                  onPress={() => this._changeSpeed(0.5)}
-                />
-                <View style={styles.marginRight} />
-                <Button
-                  title="Normal"
-                  color="#4caf50"
-                  onPress={() => this._changeSpeed(1)}
-                />
-                <View style={styles.marginRight} />
-                <Button
-                  title="Fast"
-                  color="#4caf50"
-                  onPress={() => this._changeSpeed(1.5)}
-                />
-              </View>
-            </View>
-          </View>
+        <Header {...this.props} screen={AppConstants.NOTIFICATION} />
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <CustomText style={{ fontSize: 30 }}>Coming soon...</CustomText>
         </View>
       </View>
     );

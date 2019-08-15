@@ -11,207 +11,128 @@ import {
 import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
+import * as Animatable from "react-native-animatable";
 
 import StatusBar from "../../../../components/shared/StatusBar";
 import BrandTag from "../BrandTag";
-import ShareComponent from "../../ShareComponent";
 import Header from "../../Header/Header";
-import AppConstants from "../../../constants/AppConstants";
 import PriceTag from "../PriceTag";
 import Colors from "../../../constants/ThemeConstants";
+import ShareComponent from "../../ShareComponent";
+import PullToRefresh from "../PullToRefresh";
 
 const { width, height } = Dimensions.get("window");
 
 const PRODUCT_CARD_WIDTH = width / 2 - 30;
 const PRODUCT_CARD_HEIGHT = 200;
 
-const DealsOfTheDayData = [
-  {
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
-    name:
-      "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
-    link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
-  },
-  {
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
-    name:
-      "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
-    link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
-  },
-  {
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
-    name:
-      "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
-    link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
-  },
-  {
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
-    name:
-      "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
-    link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
-  },
-  {
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
-    name:
-      "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
-    link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
-  },
-  {
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
-    name:
-      "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
-    link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
-  },
-  {
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
-    name:
-      "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
-    link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
-  },
-  {
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
-    name:
-      "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
-    link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
-  },
-  {
-    image:
-      "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
-    name:
-      "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
-    link: "https://amzn.to/2INiHU2",
-    price: "₹ 249.00"
-  }
-];
-
 export default class GadgetsUnderTemplate extends Component {
-  _shareComponent = new ShareComponent();
-
   state = {
-    refreshing: false
-  };
-
-  onShare = link => {
-    this._shareComponent.shareFuntion(link);
+    refreshing: this.props.refreshing
   };
 
   _onRefresh = () => {
-    this.setState({ refreshing: true });
-    setTimeout(() => {
-      this.setState({ refreshing: false });
-    }, 5000);
+    this.props.refreshFunc();
   };
 
-  renderProducts = () => {
+  renderProducts = (productsData, addToWishlistButtonColor) => {
     let productTemplate = [];
-    DealsOfTheDayData.map((data, i) => {
+    productsData.map((data, i) => {
       productTemplate.push(
-        <TouchableOpacity
-          activeOpacity={1}
-          //   onPress={() => this.props.navigation.push("ProductDetails")}
-          style={{
-            width: PRODUCT_CARD_WIDTH,
-            height: PRODUCT_CARD_HEIGHT,
-            backgroundColor: Colors.white,
-            marginVertical: 10,
-            borderRadius: 5,
-            overflow: "hidden"
-          }}
+        <Animatable.View
           key={i}
+          animation={i % 2 === 0 ? "fadeInLeft" : "fadeInRight"}
+          delay={500}
+          duration={200}
         >
-          <View
+          <TouchableOpacity
+            activeOpacity={1}
+            //   onPress={() => this.props.navigation.push("PRODUCT_DETAILS")}
             style={{
-              width: "100%",
-              // height: "95%",
-              position: "relative",
-              padding: 5
+              width: PRODUCT_CARD_WIDTH,
+              height: PRODUCT_CARD_HEIGHT,
+              backgroundColor: Colors.white,
+              marginVertical: 10,
+              borderRadius: 5,
+              overflow: "hidden"
             }}
           >
             <View
               style={{
-                justifyContent: "space-between",
-                flexDirection: "row",
-                alignItems: "flex-start"
+                width: "100%",
+                // height: "95%",
+                position: "relative",
+                padding: 5
               }}
             >
-              <BrandTag brand="Amazon" />
-              <TouchableOpacity onPress={() => this.onShare(data.link)}>
-                <Feather
-                  style={{
-                    color: Colors.primaryDarkThemeColor,
-                    fontSize: 20
-                  }}
-                  name="share-2"
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={{ alignItems: "center" }}>
               <View
                 style={{
-                  width: 100,
-                  height: 100
+                  justifyContent: "space-between",
+                  flexDirection: "row",
+                  alignItems: "flex-start"
                 }}
               >
-                <Image
-                  source={{ uri: data.image }}
-                  style={{ flex: 1, width: null, height: null }}
-                  resizeMode="cover"
+                <BrandTag
+                  brand={data.s}
+                  backgroundColor={addToWishlistButtonColor}
+                />
+                <ShareComponent
+                  link={data.l}
+                  color={addToWishlistButtonColor}
                 />
               </View>
+              <View style={{ alignItems: "center" }}>
+                <View
+                  style={{
+                    width: 100,
+                    height: 100
+                  }}
+                >
+                  <Image
+                    source={{ uri: data.i }}
+                    style={{ flex: 1, width: null, height: null }}
+                    resizeMode="cover"
+                  />
+                </View>
+              </View>
+              <View>
+                <Text
+                  style={{ color: Colors.grey, fontSize: 10 }}
+                  numberOfLines={2}
+                >
+                  {data.n}
+                </Text>
+                <PriceTag price={data.p} />
+              </View>
             </View>
-            <View>
-              <Text
-                style={{ color: Colors.grey, fontSize: 10 }}
-                numberOfLines={2}
-              >
-                {data.name}
-              </Text>
-              <PriceTag price={data.price} />
-            </View>
-          </View>
-          <TouchableOpacity
-            style={{
-              flex: 1,
-              // borderTopWidth: 1,
-              backgroundColor: Colors.like,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Feather
-              color={Colors.white}
-              name="heart"
-              style={{ fontSize: 13 }}
-            />
-            <Text
+            <TouchableOpacity
               style={{
-                textAlign: "center",
-                color: Colors.white,
-                fontSize: 13,
-                paddingLeft: 5
+                flex: 1,
+                // borderTopWidth: 1,
+                backgroundColor: addToWishlistButtonColor,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center"
               }}
             >
-              Add to wishlist
-            </Text>
+              <Feather
+                color={Colors.white}
+                name="heart"
+                style={{ fontSize: 13 }}
+              />
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: Colors.white,
+                  fontSize: 13,
+                  paddingLeft: 5
+                }}
+              >
+                Add to wishlist
+              </Text>
+            </TouchableOpacity>
           </TouchableOpacity>
-        </TouchableOpacity>
+        </Animatable.View>
       );
     });
 
@@ -219,6 +140,13 @@ export default class GadgetsUnderTemplate extends Component {
   };
 
   render() {
+    const {
+      linearGradientColors,
+      productsData,
+      addToWishlistButtonColor,
+      refreshing,
+      headerTitle
+    } = this.props;
     return (
       <View
         style={{
@@ -226,45 +154,49 @@ export default class GadgetsUnderTemplate extends Component {
         }}
       >
         <StatusBar />
-        <Header {...this.props} screen={AppConstants.GADGETS_UNDER_100} />
+        <Header {...this.props} screen={headerTitle} />
+        <PullToRefresh />
         <View
           style={{ padding: 10, paddingBottom: Constants.statusBarHeight * 4 }}
         >
-          <LinearGradient
-            start={{ x: 0, y: 0.75 }}
-            end={{ x: 1, y: 0.25 }}
-            colors={["#f74e7f", "#f74e7f", "#f74e7f", "#f87b48", "#f87b48"]}
-            style={{
-              borderRadius: 10,
-              elevation: 10,
-              paddingHorizontal: 10,
-              paddingVertical: 5
-            }}
-          >
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{
-                paddingVertical: 10,
-                paddingHorizontal: 5,
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "space-between"
+          <Animatable.View animation="slideInUp" duration={500}>
+            <LinearGradient
+              start={{ x: 0, y: 0.75 }}
+              end={{ x: 1, y: 0.25 }}
+              colors={linearGradientColors}
+              style={{
+                borderRadius: 10,
+                elevation: 10,
+                paddingHorizontal: 10,
+                paddingVertical: 5
               }}
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this._onRefresh}
-                  colors={[
-                    Colors.primaryDarkThemeColor,
-                    Colors.secondaryColor,
-                    Colors.like
-                  ]}
-                />
-              }
             >
-              {this.renderProducts()}
-            </ScrollView>
-          </LinearGradient>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                  paddingVertical: 10,
+                  paddingHorizontal: 5,
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "space-between",
+                  minHeight: 200
+                }}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={this._onRefresh}
+                    colors={[
+                      Colors.primaryDarkThemeColor,
+                      Colors.secondaryColor,
+                      Colors.like
+                    ]}
+                  />
+                }
+              >
+                {this.renderProducts(productsData, addToWishlistButtonColor)}
+              </ScrollView>
+            </LinearGradient>
+          </Animatable.View>
         </View>
       </View>
     );

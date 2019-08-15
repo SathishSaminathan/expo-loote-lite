@@ -1,0 +1,7 @@
+const APIConstants = {
+  API_URL: "http://18.221.100.6:5000",
+  GET_PRODUCTS_UNDER_500: "GET_PRODUCTS_UNDER_500",
+  GET_PRODUCTS_UNDER_100: "GET_PRODUCTS_UNDER_100"
+};
+
+export default APIConstants;

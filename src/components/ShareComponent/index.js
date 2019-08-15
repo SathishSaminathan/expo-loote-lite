@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, Share } from "react-native";
+import { TouchableOpacity, Share } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import Colors from "../../constants/ThemeConstants";
 
-class ShareComponent {
+class ShareComponent extends Component {
   shareFuntion(link) {
     try {
       const result = Share.share({
@@ -21,6 +23,24 @@ class ShareComponent {
       alert(error.message);
     }
   }
+  render() {
+    const { link, color } = this.props;
+    return (
+      <TouchableOpacity onPress={() => this.shareFuntion(link)}>
+        <Feather
+          style={{
+            color: color,
+            fontSize: 20
+          }}
+          name="share-2"
+        />
+      </TouchableOpacity>
+    );
+  }
 }
 
 export default ShareComponent;
+
+ShareComponent.defaultProps = {
+  color: Colors.primaryThemeColor
+};

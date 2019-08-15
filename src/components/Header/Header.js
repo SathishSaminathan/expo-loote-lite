@@ -5,6 +5,7 @@ import { Feather } from "@expo/vector-icons";
 import Colors from "../../constants/ThemeConstants";
 import Images from "../../assets/images/images";
 import AppConstants from "../../constants/AppConstants";
+import { CustomText } from "../../../components/StyledText";
 
 class Header extends Component {
   constructor(props) {
@@ -13,6 +14,16 @@ class Header extends Component {
   }
 
   getHeaderOptions = (screen, title) => {
+    const headerText = (
+      <CustomText
+        style={{
+          color: Colors.secondaryColor,
+          fontSize: 20
+        }}
+      >
+        {screen}
+      </CustomText>
+    );
     switch (screen) {
       case AppConstants.HOME:
         return (
@@ -42,15 +53,7 @@ class Header extends Component {
             >
               <Feather style={styles.iconStyle} name="menu" />
             </TouchableOpacity>
-            <Text
-              style={{
-                color: Colors.secondaryColor,
-                // fontFamily: "Lato-BoldItalic",
-                fontSize: 20
-              }}
-            >
-              {title}
-            </Text>
+            {headerText}
             <View style={{ width: 25, height: 25 }} />
           </>
         );
@@ -62,53 +65,27 @@ class Header extends Component {
             >
               <Feather style={styles.iconStyle} name="menu" />
             </TouchableOpacity>
-            <Text
-              style={{
-                color: Colors.secondaryColor,
-                // fontFamily: "Lato-BoldItalic",
-                fontSize: 20
-              }}
-            >
-              {screen}
-            </Text>
+            {headerText}
             <View style={{ width: 25, height: 25 }} />
           </>
         );
       case AppConstants.NOTIFICATION:
         return (
           <>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.openDrawer()}
-            >
-              <Feather style={styles.iconStyle} name="menu" />
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+              <Feather style={styles.iconStyle} name="arrow-left" />
             </TouchableOpacity>
-            <Text
-              style={{
-                color: Colors.secondaryColor,
-                // fontFamily: "Lato-BoldItalic",
-                fontSize: 20
-              }}
-            >
-              {title}
-            </Text>
+            {headerText}
             <View style={{ width: 25, height: 25 }} />
           </>
         );
-      case AppConstants.PRODUCTDETAILS:
+      case AppConstants.PRODUCT_DETAILS:
         return (
           <>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
               <Feather style={styles.iconStyle} name="arrow-left" />
             </TouchableOpacity>
-            <Text
-              style={{
-                color: Colors.secondaryColor,
-                // fontFamily: "Lato-BoldItalic",
-                fontSize: 20
-              }}
-            >
-              Product Details
-            </Text>
+            {headerText}
             <TouchableOpacity onPress={() => this.props.toggleMenu()}>
               <Feather style={styles.iconStyle} name="more-vertical" />
             </TouchableOpacity>
@@ -122,15 +99,7 @@ class Header extends Component {
             >
               <Feather style={styles.iconStyle} name="menu" />
             </TouchableOpacity>
-            <Text
-              style={{
-                color: Colors.secondaryColor,
-                // fontFamily: "Lato-BoldItalic",
-                fontSize: 20
-              }}
-            >
-              {title}
-            </Text>
+            {headerText}
             <View style={{ width: 25, height: 25 }} />
           </>
         );
@@ -142,15 +111,7 @@ class Header extends Component {
             >
               <Feather style={styles.iconStyle} name="menu" />
             </TouchableOpacity>
-            <Text
-              style={{
-                color: Colors.secondaryColor,
-                // fontFamily: "Lato-BoldItalic",
-                fontSize: 20
-              }}
-            >
-              {screen}
-            </Text>
+            {headerText}
             <View style={{ width: 25, height: 25 }} />
           </>
         );

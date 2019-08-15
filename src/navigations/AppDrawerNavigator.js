@@ -25,12 +25,13 @@ import ProductDetails from "../screens/ProductDetails";
 import WebViewPage from "../screens/WebViewPage";
 import Login from "../screens/auth/Login";
 import LoadingScreen from "../screens/LoadingScreen";
-import Profile from "../screens/Profile";
+
 import CameraScreen from "../screens/CameraScreen";
 import Images from "../assets/images/images";
 import Wishlist from "../screens/Wishlist";
 import GadgetsUnder100 from "../components/GadgetsUnder100";
 import GadgetsUnder500 from "../components/GadgetsUnder500";
+import { CustomText } from "../../components/StyledText";
 
 const { width, height } = Dimensions.get("window");
 
@@ -64,22 +65,20 @@ const CustomDrawerItems = props => {
             }}
           >
             <Image
-              source={{
-                uri: props.screenProps && props.screenProps.profile_picture
-              }}
+              source={Images.logo}
               resizeMode="cover"
               style={{ flex: 1, width: null, height: null }}
             />
           </View>
           <View style={{ paddingTop: 10 }}>
-            <Text style={{ color: Colors.white, fontSize: 15 }}>
-              {props.screenProps && props.screenProps.displayName}
-            </Text>
+            <CustomText style={{ color: Colors.white, fontSize: 15 }}>
+              Loot Everything
+            </CustomText>
           </View>
           <View>
-            <Text style={{ color: Colors.white, fontSize: 12 }}>
-              {props.screenProps && props.screenProps.gmail}
-            </Text>
+            <CustomText style={{ color: Colors.white, fontSize: 12 }}>
+              Sathishcse1975@gmail.com
+            </CustomText>
           </View>
         </View>
       </View>
@@ -95,22 +94,11 @@ const productStackNavigations = createStackNavigator(
     Home: Home,
     ProductDetails: ProductDetails,
     WebViewPage: WebViewPage,
-    CameraScreen: CameraScreen
+    CameraScreen: CameraScreen,
+    Notification: Notification
   },
   {
     initialRouteName: "Home",
-    headerMode: "none"
-  }
-);
-
-const ProfileStack = createStackNavigator(
-  {
-    Profile: Profile,
-    ProductDetails: ProductDetails,
-    CameraScreen: CameraScreen
-  },
-  {
-    initialRouteName: "Profile",
     headerMode: "none"
   }
 );
@@ -136,24 +124,15 @@ const AppDrawerNavigations = createDrawerNavigator(
         )
       }
     },
-    Notification: {
-      screen: Notification,
-      navigationOptions: {
-        // title: "Search Videos",
-        drawerIcon: ({ tintColor }) => (
-          <Feather color={tintColor} name="bell" style={{ fontSize: 20 }} />
-        )
-      }
-    },
-    Profile: {
-      screen: ProfileStack,
-      navigationOptions: {
-        // title: "Search Videos",
-        drawerIcon: ({ tintColor }) => (
-          <Feather color={tintColor} name="user" style={{ fontSize: 20 }} />
-        )
-      }
-    },
+    // Notification: {
+    //   screen: Notification,
+    //   navigationOptions: {
+    //     // title: "Search Videos",
+    //     drawerIcon: ({ tintColor }) => (
+    //       <Feather color={tintColor} name="bell" style={{ fontSize: 20 }} />
+    //     )
+    //   }
+    // },
     ProductDetails: {
       screen: ProductDetails
     },
@@ -193,6 +172,7 @@ const AppDrawerNavigations = createDrawerNavigator(
   {
     initialRouteName: "Home",
     contentComponent: CustomDrawerItems,
+    // unmountInactiveRoutes: true,
     contentOptions: {
       activeTintColor: Colors.primaryThemeColor,
       activeBackgroundColor: Colors.white,

@@ -5,7 +5,7 @@ import Colors from "../../../constants/ThemeConstants";
 const PriceTag = ({ price }) => {
   return (
     <Text>
-      {price}
+      ₹ {price}
       <Text
         style={{
           fontSize: 6,

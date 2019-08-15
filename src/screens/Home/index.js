@@ -18,6 +18,11 @@ import DealsOfTheDay from "../../components/DealsOfTheDay/DealsOfTheDay";
 import PickedForYou from "../../components/PickedForYou/PickedForYou";
 import StatusBar from "../../components/StatusBar/StatusBar";
 import AppConstants from "../../constants/AppConstants";
+import Colors from "../../constants/ThemeConstants";
+import { Feather } from "@expo/vector-icons";
+import { CustomText } from "../../../components/StyledText";
+import PullToRefresh from "../../components/shared/PullToRefresh";
+import SelectByCategory from "../../components/SelectByCategory";
 
 class Home extends Component {
   constructor(props) {
@@ -29,7 +34,7 @@ class Home extends Component {
     };
   }
 
-  async componentDidMount() {   
+  async componentDidMount() {
     this.setState({
       fontLoaded: true
     });
@@ -73,6 +78,11 @@ class Home extends Component {
             ref={scroll => (this.scroll = scroll)}
             refreshControl={
               <RefreshControl
+                colors={[
+                  Colors.primaryDarkThemeColor,
+                  Colors.secondaryColor,
+                  Colors.like
+                ]}
                 refreshing={this.state.refreshing}
                 onRefresh={this._onRefresh}
               />
@@ -85,13 +95,14 @@ class Home extends Component {
             >
               <CustomSwiper />
             </View>
+            <SelectByCategory {...this.props}/>
             <DealsOfTheDay {...this.props} fontLoaded={true} />
             <PickedForYou {...this.props} fontLoaded={true} />
           </ScrollView>
           {/* {fab && <FloatingButton scroll={this.scrollToTop} />} */}
           <FloatingButton scroll={this.scrollToTop} buttonShow={fab} />
         </View>
-        
+
         {/* <Button
           title="Learn More"
           color="#841584"

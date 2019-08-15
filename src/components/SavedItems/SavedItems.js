@@ -71,7 +71,7 @@ class SavedItems extends Component {
           <TouchableOpacity
             activeOpacity={1}
             key={i}
-            onPress={() => this.props.navigation.navigate("ProductDetails")}
+            onPress={() => this.props.navigation.navigate("PRODUCT_DETAILS")}
           >
             <View
               style={{
