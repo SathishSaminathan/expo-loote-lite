@@ -48,7 +48,6 @@ class App extends Component {
 
   render() {
     const { isFontLoaded } = this.state;
-    console.log("isFontLoaded", isFontLoaded);
 
     if (!isFontLoaded) {
       return (
