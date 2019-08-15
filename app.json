@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "loote",
+    "name": "Loote Lite",
     "slug": "looteverything",
     "privacy": "public",
     "sdkVersion": "34.0.0",
@@ -11,12 +11,17 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#2874f0"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.sktech.lootelite"
+    },
+    "packagerOpts": {
+      "nonPersistent": "--nonPersistent"
+    },
     "ios": {
       "supportsTablet": true
     }

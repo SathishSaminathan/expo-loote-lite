@@ -14,7 +14,6 @@ import {
   Text
 } from "react-native";
 import { connect } from "react-redux";
-import { Constants } from "expo";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 
 import Home from "../screens/Home";
