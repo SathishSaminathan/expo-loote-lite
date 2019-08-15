@@ -22,6 +22,7 @@ import Colors from "../../constants/ThemeConstants";
 import { Feather } from "@expo/vector-icons";
 import { CustomText } from "../../../components/StyledText";
 import PullToRefresh from "../../components/shared/PullToRefresh";
+import SelectByCategory from "../../components/SelectByCategory";
 
 class Home extends Component {
   constructor(props) {
@@ -94,6 +95,7 @@ class Home extends Component {
             >
               <CustomSwiper />
             </View>
+            <SelectByCategory {...this.props}/>
             <DealsOfTheDay {...this.props} fontLoaded={true} />
             <PickedForYou {...this.props} fontLoaded={true} />
           </ScrollView>

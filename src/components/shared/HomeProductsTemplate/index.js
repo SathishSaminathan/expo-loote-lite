@@ -89,7 +89,6 @@ class HomeProductsTemplate extends Component {
           <CustomText
             style={{
               fontSize: 20,
-              fontFamily: "Lato-BoldItalic",
               textDecorationLine: "underline"
             }}
           >
