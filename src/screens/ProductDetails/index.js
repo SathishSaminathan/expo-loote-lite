@@ -6,7 +6,8 @@ import {
   Dimensions,
   TouchableOpacity,
   StyleSheet,
-  Image
+  Image,
+  ScrollView
 } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
@@ -16,6 +17,7 @@ import Colors from "../../constants/ThemeConstants";
 import ShareComponent from "../../components/ShareComponent";
 import { CustomText } from "../../../components/StyledText";
 import PriceTag from "../../components/shared/PriceTag";
+import Accordion from "../../components/shared/Accordion";
 
 const { width, height } = Dimensions.get("window");
 
@@ -24,14 +26,13 @@ const HEADER_HEIGHT = 60;
 const productData = {
   b: "Looterrrrrrrrr",
   f: ["Feature1", "Feature2", "Feature3"],
-  i:
-    "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
+  i: "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
   l: "https://amzn.to/2INiHU2",
   n:
     "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
   p: "249.00",
   s: "Amazon"
-}
+};
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -206,54 +207,56 @@ class ProductDetails extends Component {
             }}
           />
         </Animated.View>
-        <View
-          style={{
-            flex: 1,
-            paddingTop: HEADER_HEIGHT
-          }}
-        >
-          <Text style={styles.productName}>{productData.n}</Text>
-          <View style={{ width: "100%", height: 300 }}>
-            <Image
-              source={{
-                uri: productData.i
-              }}
+        <View style={{ marginTop: HEADER_HEIGHT }}>
+          <ScrollView contentContainerStyle={{ paddingBottom: HEADER_HEIGHT }}>
+            <Text style={styles.productName}>{productData.n}</Text>
+            <View style={{ width: "100%", height: 300 }}>
+              <Image
+                source={{
+                  uri: productData.i
+                }}
+                style={{
+                  width: null,
+                  height: null,
+                  flex: 1,
+                  paddingHorizontal: 10
+                }}
+              />
+            </View>
+            <View style={{ padding: 10 }}>
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 40
+                }}
+              >
+                <PriceTag price={productData.p} />
+              </Text>
+            </View>
+            <Accordion title="Features" data={productData.f} />
+            <TouchableOpacity
               style={{
-                width: null,
-                height: null,
-                flex: 1,
-                paddingHorizontal: 10
+                padding: 10,
+                backgroundColor: Colors.primaryThemeColor,
+                borderRadius: 20,
+                marginHorizontal: 10
               }}
-            />
-          </View>
-          <View style={{ padding: 10 }}>
-            <Text
-              style={{
-                color: Colors.black,
-                fontSize: 40
-              }}
+              // onPress={() => this.props.navigation.push("WebViewPage")}
+              onPress={() =>
+                WebBrowser.openBrowserAsync("https://amzn.to/2INiHU2")
+              }
             >
-              <PriceTag price={productData.p} />
-            </Text>
-          </View>
-          <TouchableOpacity
-            style={{
-              padding: 10,
-              backgroundColor: Colors.primaryThemeColor,
-              borderRadius: 20,
-              marginHorizontal: 10
-            }}
-            // onPress={() => this.props.navigation.push("WebViewPage")}
-            onPress={() =>
-              WebBrowser.openBrowserAsync("https://amzn.to/2INiHU2")
-            }
-          >
-            <Text
-              style={{ color: Colors.white, fontSize: 20, textAlign: "center" }}
-            >
-              See More and Buy With Amazon
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={{
+                  color: Colors.white,
+                  fontSize: 20,
+                  textAlign: "center"
+                }}
+              >
+                See More and Buy With Amazon
+              </Text>
+            </TouchableOpacity>
+          </ScrollView>
         </View>
       </View>
     );
