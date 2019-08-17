@@ -10,7 +10,8 @@ export class ProductServices {
     };
     switch (type) {
       case APIConstants.GET_PRODUCTS_UNDER_500:
-        return axios.post(`${APIConstants.API_URL}/product/getGadgets`, data, config);
+        // return axios.post(`${APIConstants.API_URL}/product/getGadgets`, data, config);
+        return axios.get("https://api.myjson.com/bins/cokwz")
       default:
         return;
     }

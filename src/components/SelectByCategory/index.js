@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Dimensions, Text, Image } from "react-native";
+import { View, Dimensions, Text, Image, TouchableOpacity } from "react-native";
 
 import { CustomText } from "../../../components/StyledText";
 import { Colors } from "react-native-paper";
@@ -11,7 +11,7 @@ class SelectByCategory extends Component {
     let template = [];
     for (let i = 0; i < 4; i++) {
       template.push(
-        <View
+        <TouchableOpacity
           style={{
             width: width / 2 - 10,
             height: 200,
@@ -19,6 +19,12 @@ class SelectByCategory extends Component {
             alignItems: "center"
           }}
           key={i}
+          activeOpacity={0.9}
+          onPress={() =>
+            this.props.navigation.push("ViewTemplate", {
+              screen: ` Fun Gadgets${i}`
+            })
+          }
         >
           <View
             style={{
@@ -46,10 +52,10 @@ class SelectByCategory extends Component {
                 justifyContent: "center"
               }}
             >
-              <CustomText>Fun Gadgets</CustomText>
+              <CustomText>Fun Gadgets{i}</CustomText>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     }
     return template;

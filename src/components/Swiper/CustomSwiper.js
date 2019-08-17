@@ -47,7 +47,7 @@ export default class CustomSwiper extends Component {
   render() {
     return (
       <Swiper
-        style={{ flex: 1, backgroundColor: "red" }}
+        style={{ flex: 1 }}
         autoplay={true}
         showsPagination
         dotColor={Colors.primaryThemeColor}

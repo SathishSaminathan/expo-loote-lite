@@ -14,7 +14,6 @@ import {
   Text
 } from "react-native";
 import { connect } from "react-redux";
-import { Constants } from "expo";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 
 import Home from "../screens/Home";
@@ -32,6 +31,7 @@ import Wishlist from "../screens/Wishlist";
 import GadgetsUnder100 from "../components/GadgetsUnder100";
 import GadgetsUnder500 from "../components/GadgetsUnder500";
 import { CustomText } from "../../components/StyledText";
+import ViewTemplate from "../components/shared/ViewTemplate";
 
 const { width, height } = Dimensions.get("window");
 
@@ -92,7 +92,8 @@ const CustomDrawerItems = props => {
 const productStackNavigations = createStackNavigator(
   {
     Home: Home,
-    ProductDetails: ProductDetails,
+    "Product Details": ProductDetails,
+    ViewTemplate: ViewTemplate,
     WebViewPage: WebViewPage,
     CameraScreen: CameraScreen,
     Notification: Notification
