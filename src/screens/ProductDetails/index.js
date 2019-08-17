@@ -6,22 +6,32 @@ import {
   Dimensions,
   TouchableOpacity,
   StyleSheet,
-  Image,
-  WebView,
-  Linking
+  Image
 } from "react-native";
-import * as WebBrowser from 'expo-web-browser';
+import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 
 import Colors from "../../constants/ThemeConstants";
 import ShareComponent from "../../components/ShareComponent";
-import AppConstants from "../../constants/AppConstants";
 import { CustomText } from "../../../components/StyledText";
+import PriceTag from "../../components/shared/PriceTag";
 
 const { width, height } = Dimensions.get("window");
 
 const HEADER_HEIGHT = 60;
+
+const productData = {
+  b: "Looterrrrrrrrr",
+  f: ["Feature1", "Feature2", "Feature3"],
+  i:
+    "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
+  l: "https://amzn.to/2INiHU2",
+  n:
+    "Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality - Dell-Lenovo-HP-Acer - LP1",
+  p: "249.00",
+  s: "Amazon"
+}
 
 class ProductDetails extends Component {
   constructor(props) {
@@ -29,7 +39,9 @@ class ProductDetails extends Component {
     this.animatedValue = new Animated.Value(0);
     this.state = {
       menuOpened: false,
-      isLiked: true
+      isLiked: true,
+      // productData: this.props.navigation.getParam("productsData")
+      productData: productData
     };
   }
 
@@ -58,7 +70,8 @@ class ProductDetails extends Component {
   };
 
   render() {
-    const { menuOpened } = this.state;
+    const { menuOpened, productData } = this.state;
+    console.log("productData", productData);
 
     const translateY = this.animatedValue.interpolate({
       inputRange: [0, 1],
@@ -109,10 +122,12 @@ class ProductDetails extends Component {
           <CustomText
             style={{
               color: Colors.secondaryColor,
-              fontSize: 20
+              fontSize: 20,
+              maxWidth: Math.floor(width / 2)
             }}
+            numberOfLines={1}
           >
-            {AppConstants.PRODUCT_DETAILS}
+            {productData.n}
           </CustomText>
           <TouchableOpacity
             onPress={() =>
@@ -197,15 +212,11 @@ class ProductDetails extends Component {
             paddingTop: HEADER_HEIGHT
           }}
         >
-          <Text style={styles.productName}>
-            Tamatina Pub G Laptop Skins for 15.6 inch Laptop - HD Quality -
-            Dell-Lenovo-HP-Acer - LP1
-          </Text>
+          <Text style={styles.productName}>{productData.n}</Text>
           <View style={{ width: "100%", height: 300 }}>
             <Image
               source={{
-                uri:
-                  "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg"
+                uri: productData.i
               }}
               style={{
                 width: null,
@@ -222,7 +233,7 @@ class ProductDetails extends Component {
                 fontSize: 40
               }}
             >
-              $<Text style={{ color: Colors.black, fontSize: 30 }}>12</Text>
+              <PriceTag price={productData.p} />
             </Text>
           </View>
           <TouchableOpacity
@@ -272,7 +283,6 @@ const styles = StyleSheet.create({
   productName: {
     fontSize: 22,
     color: Colors.black,
-    paddingHorizontal: 10,
-    fontFamily: "Lato-Regular"
+    paddingHorizontal: 10
   }
 });

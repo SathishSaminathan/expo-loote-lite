@@ -15,6 +15,7 @@ import ShareComponent from "../../ShareComponent";
 import BrandTag from "../BrandTag";
 import PriceTag from "../PriceTag";
 import { CustomText } from "../../../../components/StyledText";
+import AppConstants from "../../../constants/AppConstants";
 
 const { width, height } = Dimensions.get("window");
 const PRODUCT_CARD_WIDTH = width / 2 - 18;
@@ -27,8 +28,9 @@ class HomeProductsTemplate extends Component {
       productTemplate.push(
         <TouchableOpacity
           activeOpacity={1}
-          // onPress={() => WebBrowser.openBrowserAsync(data.link)}
-          onPress={() => this.props.navigation.push("ProductDetails")}
+          onPress={() =>
+            this.props.navigation.push(AppConstants.PRODUCT_DETAILS)
+          }
           style={{
             width: PRODUCT_CARD_WIDTH,
             height: PRODUCT_CARD_HEIGHT,

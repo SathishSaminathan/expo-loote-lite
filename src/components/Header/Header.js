@@ -24,6 +24,17 @@ class Header extends Component {
         {screen}
       </CustomText>
     );
+    if (this.props.back) {
+      return (
+        <>
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+            <Feather style={styles.iconStyle} name="arrow-left" />
+          </TouchableOpacity>
+          {headerText}
+          <View style={{ width: 25, height: 25 }} />
+        </>
+      );
+    }
     switch (screen) {
       case AppConstants.HOME:
         return (

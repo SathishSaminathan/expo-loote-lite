@@ -1,39 +1,82 @@
 import React, { Component } from "react";
 import {
   View,
-  Text,
   ScrollView,
-  Dimensions,
+  RefreshControl,
   TouchableOpacity,
-  Image,
-  RefreshControl
+  Dimensions,
+  Image
 } from "react-native";
 import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
-import { Feather } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
+import { Feather } from "@expo/vector-icons";
 
-import StatusBar from "../../../../components/shared/StatusBar";
 import BrandTag from "../BrandTag";
-import Header from "../../Header/Header";
 import PriceTag from "../PriceTag";
-import Colors from "../../../constants/ThemeConstants";
 import ShareComponent from "../../ShareComponent";
+import StatusBar from "../../StatusBar/StatusBar";
+import Header from "../../Header/Header";
+import Colors from "../../../constants/ThemeConstants";
 import PullToRefresh from "../PullToRefresh";
+import { ProductServices } from "../../../services/ProductServices";
+import APIConstants from "../../../constants/APIConstants";
 import { CustomText } from "../../../../components/StyledText";
+import { Snackbar } from "react-native-paper";
+import AppConstants from "../../../constants/AppConstants";
 
 const { width, height } = Dimensions.get("window");
 
 const PRODUCT_CARD_WIDTH = width / 2 - 30;
 const PRODUCT_CARD_HEIGHT = 200;
+const colorArray = [Colors.like, Colors.primaryThemeColor];
 
-export default class GadgetsUnderTemplate extends Component {
+class ViewTemplate extends Component {
+  _productServices = new ProductServices();
   state = {
-    refreshing: this.props.refreshing
+    productsData: [],
+    refreshing: true,
+    dataLoaded: false,
+    message: "",
+    initialLoad: true,
+    addToWishlistButtonColor:
+      colorArray[Math.floor(Math.random() * (1 - 0 + 1) + 0)]
   };
+  componentDidMount() {
+    this.fetchData();
+  }
 
-  _onRefresh = () => {
-    this.props.refreshFunc();
+  fetchData = () => {
+    this.setState({
+      refreshing: true,
+      dataLoaded: false
+    });
+    const data = {
+      p: 100
+    };
+    this._productServices
+      .services(APIConstants.GET_PRODUCTS_UNDER_500, data)
+      .then(res => {
+        this.setState({
+          productsData: res.data.sm,
+          refreshing: false,
+          dataLoaded: true,
+          message: this.state.initialLoad
+            ? "Loaded Successfully"
+            : "You are viewing latest products",
+          initialLoad: false,
+          addToWishlistButtonColor:
+            colorArray[Math.floor(Math.random() * (1 - 0 + 1) + 0)]
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          refreshing: false,
+          dataLoaded: true,
+          message: "Something went wrong"
+        });
+      });
   };
 
   renderProducts = (productsData, addToWishlistButtonColor) => {
@@ -48,14 +91,19 @@ export default class GadgetsUnderTemplate extends Component {
         >
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() => this.props.navigation.push(AppConstants.PRODUCT_DETAILS)}
+            onPress={() =>
+              this.props.navigation.push(AppConstants.PRODUCT_DETAILS, {
+                productsData: data
+              })
+            }
             style={{
               width: PRODUCT_CARD_WIDTH,
               height: PRODUCT_CARD_HEIGHT,
               backgroundColor: Colors.white,
               marginVertical: 10,
               borderRadius: 5,
-              overflow: "hidden"
+              overflow: "hidden",
+              elevation: 5
             }}
           >
             <View
@@ -142,32 +190,40 @@ export default class GadgetsUnderTemplate extends Component {
 
   render() {
     const {
-      linearGradientColors,
       productsData,
-      addToWishlistButtonColor,
       refreshing,
-      headerTitle
-    } = this.props;
+      dataLoaded,
+      message,
+      addToWishlistButtonColor
+    } = this.state;
+    const linearGradientColors = [
+      "#f74e7f",
+      "#f74e7f",
+      "#f74e7f",
+      "#f87b48",
+      "#f87b48"
+    ];
+
     return (
-      <View
-        style={{
-          flex: 1
-        }}
-      >
+      <View>
         <StatusBar />
-        <Header {...this.props} screen={headerTitle} />
-        <PullToRefresh />
+        <Header
+          {...this.props}
+          screen={this.props.navigation.getParam("screen")}
+          back
+        />
+        <PullToRefresh color={addToWishlistButtonColor} />
         <View
           style={{ padding: 10, paddingBottom: Constants.statusBarHeight * 4 }}
         >
           <Animatable.View animation="slideInUp" duration={500}>
-            <LinearGradient
-              start={{ x: 0, y: 0.75 }}
-              end={{ x: 1, y: 0.25 }}
-              colors={linearGradientColors}
+            <View
+              //   start={{ x: 0, y: 0.75 }}
+              //   end={{ x: 1, y: 0.25 }}
+              //   colors={linearGradientColors}
               style={{
                 borderRadius: 10,
-                elevation: 10,
+                // elevation: 10,
                 paddingHorizontal: 10,
                 paddingVertical: 5
               }}
@@ -185,7 +241,7 @@ export default class GadgetsUnderTemplate extends Component {
                 refreshControl={
                   <RefreshControl
                     refreshing={refreshing}
-                    onRefresh={this._onRefresh}
+                    onRefresh={this.fetchData}
                     colors={[
                       Colors.primaryDarkThemeColor,
                       Colors.secondaryColor,
@@ -196,10 +252,26 @@ export default class GadgetsUnderTemplate extends Component {
               >
                 {this.renderProducts(productsData, addToWishlistButtonColor)}
               </ScrollView>
-            </LinearGradient>
+            </View>
           </Animatable.View>
         </View>
+        <Snackbar
+          style={{ backgroundColor: addToWishlistButtonColor }}
+          visible={dataLoaded}
+          onDismiss={() => this.setState({ dataLoaded: false })}
+          duration={1000}
+          // action={{
+          //   label: "Undo",
+          //   onPress: () => {
+          //     // Do something
+          //   }
+          // }}
+        >
+          {message}
+        </Snackbar>
       </View>
     );
   }
 }
+
+export default ViewTemplate;
