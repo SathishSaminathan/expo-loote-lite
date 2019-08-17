@@ -57,8 +57,10 @@ class ViewTemplate extends Component {
     this._productServices
       .services(APIConstants.GET_PRODUCTS_UNDER_500, data)
       .then(res => {
+        console.log("res", res.data);
         this.setState({
-          productsData: res.data.sm,
+          // productsData: res.data.sm,
+          productsData: res.data,
           refreshing: false,
           dataLoaded: true,
           message: this.state.initialLoad
@@ -225,7 +227,7 @@ class ViewTemplate extends Component {
                 borderRadius: 10,
                 // elevation: 10,
                 paddingHorizontal: 10,
-                paddingVertical: 5
+                paddingBottom: Constants.statusBarHeight * 6
               }}
             >
               <ScrollView
@@ -236,7 +238,7 @@ class ViewTemplate extends Component {
                   flexDirection: "row",
                   flexWrap: "wrap",
                   justifyContent: "space-between",
-                  minHeight: 200
+                  minHeight: 200,
                 }}
                 refreshControl={
                   <RefreshControl

@@ -17,6 +17,7 @@ class Accordion extends Component {
       template.push(
         <List.Item
           title={data}
+          description={data}
           left={props => (
             <List.Icon {...props} icon="star" color={Colors.secondaryColor} />
           )}
@@ -32,6 +33,7 @@ class Accordion extends Component {
     return (
       <>
         <List.Accordion
+          theme={{ colors: { primary: Colors.primaryThemeColor } }}
           title={title}
           left={props => (
             <List.Icon {...props} icon={!expanded ? "add-circle" : "remove"} />

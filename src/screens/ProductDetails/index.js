@@ -18,6 +18,8 @@ import ShareComponent from "../../components/ShareComponent";
 import { CustomText } from "../../../components/StyledText";
 import PriceTag from "../../components/shared/PriceTag";
 import Accordion from "../../components/shared/Accordion";
+import { Button } from "react-native-paper";
+import BrandTag from "../../components/shared/BrandTag";
 
 const { width, height } = Dimensions.get("window");
 
@@ -25,7 +27,11 @@ const HEADER_HEIGHT = 60;
 
 const productData = {
   b: "Looterrrrrrrrr",
-  f: ["Feature1", "Feature2", "Feature3"],
+  f: [
+    "Feature1Feature1Feature1Feature1Feature1Feature1Feature1",
+    "Feature2",
+    "Feature3"
+  ],
   i: "https://images-na.ssl-images-amazon.com/images/I/71yomw7uPmL._SX679_.jpg",
   l: "https://amzn.to/2INiHU2",
   n:
@@ -232,30 +238,31 @@ class ProductDetails extends Component {
               >
                 <PriceTag price={productData.p} />
               </Text>
-            </View>
-            <Accordion title="Features" data={productData.f} />
-            <TouchableOpacity
-              style={{
-                padding: 10,
-                backgroundColor: Colors.primaryThemeColor,
-                borderRadius: 20,
-                marginHorizontal: 10
-              }}
-              // onPress={() => this.props.navigation.push("WebViewPage")}
-              onPress={() =>
-                WebBrowser.openBrowserAsync("https://amzn.to/2INiHU2")
-              }
-            >
-              <Text
+              <View
                 style={{
-                  color: Colors.white,
-                  fontSize: 20,
-                  textAlign: "center"
+                  flexDirection: "row"
                 }}
               >
-                See More and Buy With Amazon
-              </Text>
-            </TouchableOpacity>
+                <BrandTag brand={productData.s} />
+                <BrandTag
+                  brand={productData.b}
+                  backgroundColor={Colors.secondaryColor}
+                  color={Colors.primaryDarkThemeColor}
+                />
+              </View>
+            </View>
+            <Accordion title="Features" data={productData.f} />
+            <Button
+              icon="remove-red-eye"
+              mode="contained"
+              onPress={() => WebBrowser.openBrowserAsync(productData.l)}
+              style={{
+                marginHorizontal: 10,
+                backgroundColor: Colors.primaryThemeColor
+              }}
+            >
+              See More and Buy With Amazon
+            </Button>
           </ScrollView>
         </View>
       </View>

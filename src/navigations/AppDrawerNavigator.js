@@ -171,7 +171,7 @@ const AppDrawerNavigations = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: "ProductDetails",
+    initialRouteName: "Home",
     contentComponent: CustomDrawerItems,
     // unmountInactiveRoutes: true,
     contentOptions: {
